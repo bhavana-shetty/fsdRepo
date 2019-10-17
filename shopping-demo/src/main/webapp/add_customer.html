@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<title>Registration</title>
+</head>
+<body>
+<!-- Default form login -->
+<form class="text-center border border-light p-5" action="/AddCustomerServlet" method="post">
+
+    <p class="h4 mb-4">Input Customer Details.</p>
+
+    
+    <input type="text" id="defaultLoginFormId" class="form-control mb-4" placeholder="customer Id" name="customerId">
+
+    
+    <input type="text" id="defaultLoginFormName" class="form-control mb-4" placeholder="Name" name="customerName">
+
+ <select class="browser-default custom-select" name="customerType">
+  <option value="Unknown">Select A Type</option>
+  <option value="Corporate">Corporate</option>
+  <option value="Normal">Normal</option>
+  
+</select>
+
+    <!-- Sign in button -->
+    <button class="btn btn-info btn-block my-4" type="submit">Register</button>
+
+
+</form>
+
+</body>
+</html>
