@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.example.dao.CustomerDao;
+import com.example.dao.CustomerDaoImpl;
 import com.example.model.Customer;
 
 /**
@@ -22,6 +24,7 @@ public class AddCustomerServlet extends HttpServlet {
 	String customerName;
 	String customerType;
 	private List<String> errors;
+	private CustomerDao dao = null;
 
        
     /**
@@ -57,27 +60,29 @@ public class AddCustomerServlet extends HttpServlet {
 			// TODO: handle exception
 			errors.add("year field must be numeric");
 		}
-		String name=request.getParameter("customerName");
-		if(name.length()==0)
+		 customerName=request.getParameter("customerName");
+		if(customerName.length()==0)
 		{
 			errors.add("invalid title");
 		}
-		String cType=request.getParameter("customerType");
-		if(cType.equals("Unknown"))
+		customerType=request.getParameter("customerTypes");
+		if(customerType.equals("Unknown"))
 		{
 			errors.add("select a type");
 		}
 		if(!errors.isEmpty())
 		{
 			request.setAttribute("ERROR", errors);
-			RequestDispatcher view=request.getRequestDispatcher("error");
+			RequestDispatcher view=request.getRequestDispatcher("AddCustomer.view");
 			view.forward(request, response);
 		}
 		else
 		{
-			request.setAttribute("SUCCESS", new Customer(customerId,name,cType));
-
-			RequestDispatcher view=request.getRequestDispatcher("success");
+			Customer l = new Customer(customerId, customerName, customerType);
+			request.setAttribute("SUCCESS", l);
+			dao = new CustomerDaoImpl();
+			dao.createCustomer(l);
+			RequestDispatcher view = request.getRequestDispatcher("success");
 			view.forward(request, response);
 		}
 
